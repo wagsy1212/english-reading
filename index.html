@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Reading Practice</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="panel folders">
+      <h3>Folders</h3>
+      <ul id="folder-list"></ul>
+      <button onclick="addFolder()">Add Folder</button>
+    </div>
+    <div class="panel articles">
+      <h3>Articles</h3>
+      <ul id="article-list"></ul>
+      <button onclick="addArticle()">Add Article</button>
+    </div>
+    <div class="panel">
+      <h3>Content</h3>
+      <div id="content-wrapper">
+        <div id="content-view" class="content-box" style="display: none;"></div>
+        <textarea id="content-edit" class="content-box" style="display: none;"></textarea>
+        <div id="content-buttons" style="margin-top: 8px;">
+          <button id="edit-btn">Edit</button>
+          <button id="save-btn" style="display: none;">Save</button>
+          <button id="cancel-btn" style="display: none;">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
