@@ -30,8 +30,21 @@
         </div>
       </div>
     </div>
+    <input type="file" id="fileInput">
   </div>
 
+  <script>
+    document.getElementById("fileInput").addEventListener("change", (e) => {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const newdata = JSON.parse(event.target.result);
+        Object.entries(newdata).forEach(([key, value]) => {
+          localStorage.setItem(key, value);
+        });
+      };
+      reader.readAsText(e.target.files[0]);
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
