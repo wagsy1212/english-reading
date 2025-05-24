@@ -4,7 +4,7 @@ import json
 import time
 import re
 
-BASE_URL = "https://www.eslfast.com/begin2/index2.htm"
+BASE_URL = "https://www.eslfast.com/begin6/index4.htm"
 BASE_URL_2 = "https://www.eslfast.com"
 HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
@@ -63,7 +63,7 @@ def crawl_all_articles():
 
     return articles
 
-def save_articles_to_file(articles, filename="esl_articles_2.json"):
+def save_articles_to_file(articles, filename="english_6_4.json"):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
 
@@ -71,4 +71,4 @@ def save_articles_to_file(articles, filename="esl_articles_2.json"):
 if __name__ == "__main__":
     data = crawl_all_articles()
     save_articles_to_file(data)
-    print("✅ Đã lưu dữ liệu vào esl_articles.json")
+    print("✅ Đã lưu dữ liệu vào english_6_4.json")

@@ -73,3 +73,7 @@ body {
   #content-buttons button {
     margin-right: 8px;
   }
+
+  select {
+    display: none;
+  }
