@@ -30,19 +30,70 @@
         </div>
       </div>
     </div>
-    <input type="file" id="fileInput">
+    <!-- <input type="file" id="fileInput"> -->
+    <div>
+      <h2>Upload ESL JSON File</h2>
+  
+      <label for="keyInput">Key name (ví dụ: english 1, english 2): </label>
+      <input type="text" id="keyInput" placeholder="english 1"><br><br>
+
+      <input type="file" id="jsonFileInput" accept=".json"><br><br>
+
+      <button id="uploadBtn">Upload and Save</button>
+    </div>
+
   </div>
 
   <script>
-    document.getElementById("fileInput").addEventListener("change", (e) => {
+    // document.getElementById("fileInput").addEventListener("change", (e) => {
+    //   const reader = new FileReader();
+    //   reader.onload = function(event) {
+    //     const newdata = JSON.parse(event.target.result);
+    //     Object.entries(newdata).forEach(([key, value]) => {
+    //       localStorage.setItem(key, value);
+    //     });
+    //   };
+    //   reader.readAsText(e.target.files[0]);
+    // });
+
+    //chuyen du lieu tu file json sang localstorage
+    document.getElementById('uploadBtn').addEventListener('click', function () {
+      const fileInput = document.getElementById('jsonFileInput');
+      const keyName = document.getElementById('keyInput').value.trim();
+
+      if (!fileInput.files[0]) {
+        alert("Vui lòng chọn file JSON.");
+        return;
+      }
+
+      if (!keyName) {
+        alert("Vui lòng nhập tên key (vd: english 1).");
+        return;
+      }
+
       const reader = new FileReader();
-      reader.onload = function(event) {
-        const newdata = JSON.parse(event.target.result);
-        Object.entries(newdata).forEach(([key, value]) => {
-          localStorage.setItem(key, value);
-        });
+
+      reader.onload = function (e) {
+        try {
+          const newEntries = JSON.parse(e.target.result);
+
+          // Lấy dữ liệu hiện có
+          const readingData = JSON.parse(localStorage.getItem('readingData')) || {};
+
+          // Nếu đã có key thì nối thêm, nếu chưa thì tạo mới
+          const existingEntries = readingData[keyName] || [];
+          readingData[keyName] = existingEntries.concat(newEntries);
+
+          // Lưu lại vào localStorage
+          localStorage.setItem('readingData', JSON.stringify(readingData));
+
+          alert(`Đã nối dữ liệu vào key "${keyName}" trong localStorage.`);
+        } catch (error) {
+          alert("Lỗi: File JSON không hợp lệ.");
+        }
       };
-      reader.readAsText(e.target.files[0]);
+
+      reader.readAsText(fileInput.files[0]);
     });
   </script>
   <script src="script.js"></script>
